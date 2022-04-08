@@ -11,6 +11,9 @@ function App() {
   const handleEmail = (event) => {
     console.log(event.target.value);
   }
+  const handlePassword = (event) => {
+    console.log(event.target.value);
+  }
 
   const handleFormSubmit = (event) => {
     console.log('form submitted');
@@ -20,8 +23,8 @@ function App() {
   return (
     <div>
       <div className="registration-form w-50 mx-auto border">
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form onSubmit={handleFormSubmit}>
+          <Form.Group onBlur={handleEmail} className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
@@ -29,7 +32,7 @@ function App() {
             </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group onBlur={handlePassword} className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
