@@ -35,7 +35,7 @@ function App() {
   return (
     <div>
       <h1 className="text-center text-primary mt-3">Register our site!</h1>
-      <div className="registration-form w-50 mx-auto border p-4 mt-4">
+      <div className="registration-form w-50 mx-auto border rounded p-4 mt-4">
         <Form onSubmit={handleFormSubmit}>
           <Form.Group onBlur={handleEmail} className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
