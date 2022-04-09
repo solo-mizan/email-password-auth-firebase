@@ -1,32 +1,45 @@
-import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { Button, Form } from "react-bootstrap";
 import './App.css';
 import app from './firebase.init';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
 
 const auth = getAuth(app);
 
 function App() {
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleEmail = (event) => {
-    console.log(event.target.value);
+    setEmail(event.target.value);
   }
   const handlePassword = (event) => {
-    console.log(event.target.value);
+    setPassword(event.target.value);
   }
 
   const handleFormSubmit = (event) => {
-    console.log('form submitted');
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => {
+        console.error('error', error);
+      })
+    console.log('form submitted', email, password);
     event.preventDefault();
   }
 
   return (
     <div>
-      <div className="registration-form w-50 mx-auto border">
+      <h1 className="text-center text-primary mt-3">Register our site!</h1>
+      <div className="registration-form w-50 mx-auto border p-4 mt-4">
         <Form onSubmit={handleFormSubmit}>
           <Form.Group onBlur={handleEmail} className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" placeholder="Enter email" required />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
